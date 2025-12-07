@@ -1,0 +1,24 @@
+package dev.krypton.mixin;
+
+import net.minecraft.class_765;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+
+@Mixin({class_765.class})
+public abstract class LightmapTextureManagerMixin {
+   @ModifyArgs(
+      method = {"update"},
+      at = @At(
+   value = "INVOKE",
+   target = "Lnet/minecraft/client/texture/NativeImage;setColor(III)V"
+)
+   )
+   private void update(Args var1) {
+      .se var2 = (.se)((.vt)((.me).me.oiq).yqj).kxc(.se.class);
+      if (var2.lj()) {
+         var1.set(2, -1);
+      }
+   }
+}
